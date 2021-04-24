@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imt1bmluZ2FzIHZvaXR0YW1hdG9uIiwiaWQiOiI2MDU0YTA5NTljMzMxYjI2ZDRhOWFlNzQiLCJpYXQiOjE2MTkyNTI0MzF9.MNuH72c3SCvVt6JOdIBiUsc9lh6ZXZnfhE1m6gzdcL0
+
+{   
+    "title": "RODMAN",
+    "author":"JK",
+    "url": "bulls.com",
+    "likes": 88
+}
