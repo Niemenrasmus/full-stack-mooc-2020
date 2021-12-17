@@ -11,18 +11,20 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
-const updateBlog = async ({ id, updatedContents }) => {
+const updateBlog = async (id, updatedContents) => {
+  // console.log(typeof(updatedContents))
+
   try {
     console.log(`${baseUrl}/${id}`)
     const response = await axios.put(`${baseUrl}/${id}`, updatedContents)
     console.log(response)
     return response
+
   } catch (exception) {
     console.log(exception)
     return { error : exception.message }
   }
 }
-
 
 const create = async newObject => {
   const config = {
@@ -33,15 +35,16 @@ const create = async newObject => {
   return response.data
 }
 
-const deleteBlog = async ({ id }) => {
+const deleteBlog = async (id) => {
   try {
+    console.log(`${baseUrl}/${id}`)
     const response = await axios.delete(`${baseUrl}/${id}`)
+    console.log(response)
     return response
   } catch (exception) {
     return { error : exception.message }
   }
 }
-
 
 const exportedObject = {
   getAll,
