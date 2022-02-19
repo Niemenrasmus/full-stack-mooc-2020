@@ -1,0 +1,15 @@
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+ "username": "testaaja",
+ "password": "1234"
+}
+
+# {"title":"fsdf",
+# "author":"fsdf",
+# "url":"fsdf",
+# "likes" : 1,
+# "user":"6054a0959c331b26d4a9ae74"}
+
+# POST http://localhost:3003/api/localhost:3003/api/blogs
