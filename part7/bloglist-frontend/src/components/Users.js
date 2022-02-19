@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../services/login';
+import { TableContainer, Paper, TableBody, Table, TableRow, TableHead, TableCell } from '@material-ui/core'
+
 
 const User = ({ user }) => {
     return (
@@ -34,3 +36,5 @@ const Users = () => {
         </div>        
     )
 }
+
+export default Users

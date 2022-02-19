@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import Notification from "./components/Notification"
 import LoginForm from "./components/LoginForm"
 import BlogForm from "./components/BlogForm"
+import Users from "./components/Users"
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -96,6 +97,7 @@ const App = () => {
             deleteBlog={removeBlog}
             />
           ))}
+          <Users/> 
           </div>}        
          </div>
     )
