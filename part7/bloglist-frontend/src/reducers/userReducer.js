@@ -9,8 +9,6 @@ const notificationReducer = (state = null, action) => {
         window.localStorage.setItem('loggedUser', JSON.stringify(action.user))
         blogService.setToken(action.user.token)
         return action.user
-      case "LOGOUT":
-          return null
       case "SET_USER":
         return action.user
       default: return state
@@ -21,9 +19,10 @@ const notificationReducer = (state = null, action) => {
 export const loginUser = ( username, password ) => {
     return async dispatch => {
         try {
-            const user = await loginService({
-            username, password
+            const user = await loginService.loginService({
+               username, password
             })
+            console.log(user, "user")
             dispatch({
                 type: "LOGIN",
                 user
@@ -34,12 +33,6 @@ export const loginUser = ( username, password ) => {
             console.log(exception)
             dispatch(setNotification('wrong credentials', 5))
         }
-    }
-}
-
-export const logoutUser = () => {
-    return {
-        type: 'LOGOUT'
     }
 }
 

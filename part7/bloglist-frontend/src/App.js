@@ -1,26 +1,29 @@
-import React, { useState, useEffect} from 'react'
-import Blog from './components/Blog'
-import Notification from "./components/Notification"
+import React, {useEffect} from 'react'
+import Blog, { BlogView } from './components/Blog'
 import LoginForm from "./components/LoginForm"
 import BlogForm from "./components/BlogForm"
-import Users from "./components/Users"
+import Users, { UserView } from "./components/Users"
+
 
 import { useDispatch, useSelector } from 'react-redux'
 
 import Togglable from './components/Togglable'
+import Nav from './components/Nav'
 
 import { setNotification } from './reducers/notificationReducer'
 import { initializeBlogs } from './reducers/blogReducer'
 import { updateBlog } from './reducers/blogReducer'
 import { deleteBlog } from './reducers/blogReducer'
-import { setUser, logoutUser } from './reducers/userReducer'
+import { setUser } from './reducers/userReducer'
+
+import { Switch, Route } from 'react-router-dom'
 
 const App = () => {
-  const user = useSelector(state => state.user);
+  const user = useSelector(state => state.user)
   const blogs = useSelector(state => state.blogs)
   const dispatch = useDispatch()
 
-  const addBlogRef = React.createRef();
+  const addBlogRef = React.createRef()
 
   useEffect(() => {
     dispatch(initializeBlogs())
@@ -29,19 +32,14 @@ const App = () => {
   console.log(user, "user")
   
   useEffect(() => {
-    const loggedInUserJSON = window.localStorage.getItem('loggedUser');
+    const loggedInUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedInUserJSON) {
       const user = JSON.parse(loggedInUserJSON)
       dispatch(setUser(user))  
     }
-  }, []);
-  
-  
-  const handleLogout = async () => {
-    window.localStorage.clear()
-    dispatch(logoutUser())
     console.log(user)
-  }
+  }, [])
+
 
   const blogAddForm  = () => {
     return (
@@ -73,33 +71,49 @@ const App = () => {
     }
   
   }
-
+    
     return (
       <div>
         <h2>Welcome to blog app</h2>
-        <Notification/>
           {user === null
           ? <LoginForm/>
-          : <div>
-          <p>
-          <button onClick={handleLogout}> Log Out</button> 
-          </p>
+          :
+        <> 
+          <Nav/>
+          <Switch>
+          <Route path='/users/:id'>
+            <UserView allBlogs={blogs} />
+          </Route>
+          <Route path='/blogs/:id'>
+            <BlogView allBlogs={blogs} likeBlog = {likeBlog} />
+          </Route>
+          <Route path='/users' component={Users} />
+          <Route path='/blogs'>
+
           <h2>blogs</h2>
           {blogAddForm()}
-          { blogs
-            .sort((a, b) => b.likes - a.likes)
-            .map((blog) => (
-            <Blog  
-            key={blog.id}
-            user={user}
-            blog={blog} 
-            likeBlog={likeBlog}
-            deleteBlog={removeBlog}
-            />
-          ))}
-          <Users/> 
-          </div>}        
-         </div>
+          <table >
+            <tbody>
+                <tr>
+                    <th>Blog Name</th>
+                </tr>
+                { blogs
+                        .sort((a, b) => b.likes - a.likes)
+                        .map((blog) => (
+                      <tr key={blog.id}>
+                        <Blog  
+                        key={blog.id}
+                        blog={blog} 
+                        />
+                        </tr>
+                      ))}
+            </tbody>
+        </table>        
+          </Route>        
+      </Switch>
+      </>
+      }
+      </div>
     )
   }
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 const baseUrl = '/api/blogs'
-let token = null;
+let token = null
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -35,7 +35,7 @@ const create = async newObject => {
   return response.data
 }
 
-const deleteBlog = async (id) => {
+const deleteBlog = async id => {
   try {
     console.log(`${baseUrl}/${id}`)
     const response = await axios.delete(`${baseUrl}/${id}`)
@@ -46,12 +46,25 @@ const deleteBlog = async (id) => {
   }
 }
 
+const getComments = async id => {
+    console.log("id in middleware", id)
+    const response = await axios.get(`${baseUrl}/${id}/comments`)
+    return response.data
+}
+
+const addComment = async(id, comment) => {
+  const response = await axios.post(`${baseUrl}/${id}/comments`, comment)
+  return response.data
+}
+
 const exportedObject = {
   getAll,
   setToken,
   create,
   updateBlog,
-  deleteBlog
-};
+  deleteBlog,
+  getComments,
+  addComment
+}
 
 export default exportedObject

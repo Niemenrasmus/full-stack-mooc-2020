@@ -33,7 +33,6 @@ export const updateBlog = (blog) => {
 export const createBlog = (content) => {
   return async dispatch => { 
     const blog = await blogService.create(content)
-    console.log(blog)
       dispatch({
         type: 'NEW_ANECDOTE',
         data: blog,
@@ -60,6 +59,5 @@ export const deleteBlog = (id) => {
     })
   }
 }
-
 
 export default blogReducer
