@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev index.ts",
-    "lint": "eslint --ext .ts ."
+    "dev": "ts-node-dev src/index.ts",
+    "lint": "eslint --ext .ts .",
+    "start": "node build/src/index.js"
   },
   "author": "Rasmus Niemi",
   "license": "ISC",
@@ -18,7 +19,8 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "express": "^4.17.3"
-  },
-  "type": "module" 
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "ts-node-dev": "^1.1.8"
+  }
 }
